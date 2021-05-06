@@ -5,6 +5,8 @@ class Parcela(val ancho: Int, val largo: Int, val horasSolPorDia: Int) {
   var cantidadPlantas = 0
 
   fun superficie() = ancho * largo
+  //Redundancia mínima, se repite varias veces la formular ancho * largo cuando
+  //Se podría llamar a superficie() para resolverlo
   fun cantidadMaximaPlantas() =
     if (ancho > largo) ancho * largo / 5 else ancho * largo / 3 + largo
 
@@ -40,6 +42,8 @@ class Agricultora(val parcelas: MutableList<Parcela>) {
 
   fun plantarEstrategicamente(planta: Planta) {
     val laElegida = parcelas.maxBy { it.cantidadMaximaPlantas() - it.cantidadPlantas }!!
+
+    //Robustez. No usa el método de plantar, por lo cual evita la validación que posee.
     laElegida.plantas.add(planta)
   }
 }
