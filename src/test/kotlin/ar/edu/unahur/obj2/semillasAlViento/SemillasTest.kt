@@ -31,10 +31,15 @@ class SemillasTest : DescribeSpec ({
             parcela.plantar(menta)
             parcela.cantidadPlantas.shouldBe(1)
         }
+
+        //Este requerimiento no lo tiene la parcela. La resposabilida se la dio a la planta
+        it("Tiene complicaciones"){
+           // parcela.parcelaTieneComplicaciones()
+        }
     }
 
 
-    describe("Parcela agricultora") {
+    describe("Agricultora") {
 
         var listaDeParcelas = mutableListOf<Parcela>()
         var agricultora = Agricultora(listaDeParcelas)
@@ -55,6 +60,54 @@ class SemillasTest : DescribeSpec ({
             // contiene la cantidad de plantas
             agricultora.parcelas.first().cantidadPlantas.shouldBe(1)
         }
+
+    }
+
+    describe("Panta Menta") {
+
+        var menta = Menta(2021,1.0f)
+
+        it("Planta Menta horas de sol que tolera") {
+
+            menta.horasDeSolQueTolera().shouldBe(6)
+        }
+
+        it("Planta Menta da semillas") {
+            menta.daSemillas().shouldBe(true)
+        }
+
+
+    }
+
+    describe("Panta Soja") {
+
+        var soja = Soja(2021,1.0f, false)
+
+        it("Planta Soja horas de sol que tolera") {
+
+            soja.horasDeSolQueTolera().shouldBe(9)
+        }
+
+        //Este metodo falla porque no calcula si da semillas para una planta que no es transgenica
+        it("Planta Soja da semillas") {
+            soja.daSemillas().shouldBe(false)
+        }
+
+
+    }
+
+    describe("Panta Soja transgenia") {
+
+        var sojaTransgenica = Soja(2021,0.4f, true)
+
+        it("Planta Soja transgenia horas de sol que tolera") {
+            sojaTransgenica.horasDeSolQueTolera().shouldBe(12)
+        }
+
+        it("Planta Soja transgenia da semillas") {
+            sojaTransgenica.daSemillas().shouldBe(false)
+        }
+
 
     }
 
